@@ -16,7 +16,7 @@ class ResultPacket:
     id: str
     point_source_flux: np.ndarray  # (P, N)
     point_source_flux_uncertainty: np.ndarray  # (P, N)
-    point_source_position: np.ndarray  # (P, 2)
+    point_source_position: np.ndarray  # (P, 2) ra dec
 
     point_source_flux_posterior_samples: Optional[np.ndarray]  # (P, N, B)
     nearby_star_flux: Optional[np.ndarray]  # (S, N)
