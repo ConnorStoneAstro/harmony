@@ -25,13 +25,12 @@ class DataPacket:
     mask: np.ndarray  # (N, H, W)
 
     zeropoint: np.ndarray  # (N,)
-    mjd: Optional[np.ndarray]  # (N,)
+    mjd: np.ndarray  # (N,)
+    reference_image_flag: np.ndarray  # (N,) bool, True = no transient
 
     crval: np.ndarray  # (2,) ra dec
-    crpix: np.ndarray  # (N, 2) 0 indexing
+    crpix: np.ndarray  # (N, 2) 0 indexing, pixel loc of crval
     CD: np.ndarray  # (N, 2, 2)
-
-    reference_image_flag: Optional[np.ndarray]  # (N,) bool, True = no transient
 
     point_source_flux: Optional[np.ndarray]  # (P, N)
     point_source_position: Optional[np.ndarray]  # (P, 2) ra dec
