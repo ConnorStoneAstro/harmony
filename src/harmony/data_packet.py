@@ -1,3 +1,4 @@
+from pathlib import Path
 from typing import Optional
 from dataclasses import dataclass
 
@@ -41,3 +42,12 @@ class DataPacket:
 
     nearby_star_cutouts: Optional[np.ndarray] = None  # (S, Hs, Ws)
     nearby_star_positions: Optional[np.ndarray] = None  # (S, 2) ra dec
+
+    def save(self, filepath: Path):
+        # FIXME
+        pass
+
+    @classmethod
+    def load(cls, filepath: Path) -> "DataPacket":
+        # FIXME
+        pass

@@ -1,5 +1,6 @@
 from typing import Optional
 from dataclasses import dataclass
+from pathlib import Path
 
 import numpy as np
 
@@ -24,4 +25,13 @@ class ResultPacket:
     zeropoint: Optional[np.ndarray] = None  # (N,)
     zeropoint_uncertainty: Optional[np.ndarray] = None  # (N,)
 
-    fitter_flags: Optional[dict] = None  # Dict of flags or status information from the fitter
+    fitter_flags: Optional[dict[str, bool | int]] = None
+
+    def save(self, filepath: Path):
+        # FIXME
+        pass
+
+    @classmethod
+    def load(cls, filepath: Path) -> "ResultPacket":
+        # FIXME
+        pass
