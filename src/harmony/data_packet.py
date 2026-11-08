@@ -8,14 +8,14 @@ import numpy as np
 class DataPacket:
     """
     N: number of image cutouts
-    H: height of image cutouts
-    W: width of image cutouts
+    H: height of image cutouts (pix)
+    W: width of image cutouts (pix)
     P: number of point sources
     S: number of nearby stars
-    Hp: height of PSF cutouts (always odd)
-    Wp: width of PSF cutouts (always odd)
-    Hs: height of nearby star cutouts
-    Ws: width of nearby star cutouts
+    Hp: height of PSF cutouts (pix, always odd)
+    Wp: width of PSF cutouts (pix, always odd)
+    Hs: height of nearby star cutouts (pix)
+    Ws: width of nearby star cutouts (pix)
     """
 
     id: str
@@ -32,12 +32,12 @@ class DataPacket:
     crpix: np.ndarray  # (N, 2) 0 indexing, pixel loc of crval
     CD: np.ndarray  # (N, 2, 2)
 
-    point_source_flux: Optional[np.ndarray]  # (P, N)
-    point_source_position: Optional[np.ndarray]  # (P, 2) ra dec
+    point_source_flux: Optional[np.ndarray] = None  # (P, N)
+    point_source_position: Optional[np.ndarray] = None  # (P, 2) ra dec
 
-    psf: Optional[np.ndarray]  # (N, Hp, Wp)
-    sky: Optional[np.ndarray]  # (N,)
-    sky_uncertainty: Optional[np.ndarray]  # (N,)
+    psf: Optional[np.ndarray] = None  # (N, Hp, Wp)
+    sky: Optional[np.ndarray] = None  # (N,)
+    sky_uncertainty: Optional[np.ndarray] = None  # (N,)
 
-    nearby_star_cutouts: Optional[np.ndarray]  # (S, Hs, Ws)
-    nearby_star_positions: Optional[np.ndarray]  # (S, 2) ra dec
+    nearby_star_cutouts: Optional[np.ndarray] = None  # (S, Hs, Ws)
+    nearby_star_positions: Optional[np.ndarray] = None  # (S, 2) ra dec
