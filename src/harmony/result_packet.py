@@ -26,6 +26,8 @@ class ResultPacket:
     zeropoint_uncertainty: Optional[np.ndarray] = None  # (N,)
 
     fitter_flags: Optional[dict[str, bool | int]] = None
+    chi_squared: Optional[float] = None  # ()
+    per_cutout_chi_squared: Optional[np.ndarray] = None  # (N,)
 
     def save(self, filepath: Path):
         # FIXME

@@ -41,7 +41,13 @@ class DataPacket:
     sky_uncertainty: Optional[np.ndarray] = None  # (N,)
 
     nearby_star_cutouts: Optional[np.ndarray] = None  # (S, Hs, Ws)
+    nearby_star_variance: Optional[np.ndarray] = None  # (S, Hs, Ws)
+    nearby_star_mask: Optional[np.ndarray] = None  # (S, Hs, Ws)
     nearby_star_positions: Optional[np.ndarray] = None  # (S, 2) ra dec
+    nearby_star_crval: Optional[np.ndarray] = None  # (S, 2) ra dec
+    nearby_star_crpix: Optional[np.ndarray] = None  # (S, 2) 0 indexing, pixel loc of crval
+    nearby_star_CD: Optional[np.ndarray] = None  # (S, 2, 2)
+    nearby_star_data_index: Optional[np.ndarray] = None  # (S,) index s into the data list N
 
     def save(self, filepath: Path):
         # FIXME
