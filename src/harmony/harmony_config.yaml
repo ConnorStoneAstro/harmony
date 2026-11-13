@@ -1,0 +1,43 @@
+## Job configuration
+
+output_directory: None # Path to the output directory
+
+task_builder:
+  constructor: harmony.task_builder # Task builder class import dot path
+  data:
+    # Only one of paths_list, paths_file, or paths_dir should be specified
+    paths_list: None # List of paths to data files
+    paths_file: None # Path to a file containing data paths
+    paths_dir: None # Path to a directory containing data files
+
+job_builder:
+  constructor: harmony.slurm_array_job_builder # builds the Slurm job, import dot path
+  slurm_account: None # Account to use for the launcher (e.g., Slurm account)
+  job_name: 
+    pipeline1: harmony1
+  env_source:
+    pipeline1: path/to/env_source.sh
+  resources:
+    pipeline1: None # Dict of resources required for the pipeline (e.g., cpu, gpu, mem, time)
+
+steps:
+  pipeline1:
+    - load_data
+    - light_curve_fitter
+    - save_result
+
+## Step configurations
+
+load_data:
+  constructor: harmony.DataLoader # Data loader class import dot path
+  settings: None # Dict of data loader specific settings
+
+light_curve_fitter:
+  constructor: harmony.LightCurveFitter # Fitter class import dot path
+  settings: None # Dict of fitter specific settings
+
+save_result:
+  constructor: harmony.SaveResult # Result saver class import dot path
+  settings: None # Dict of result saver specific settings
+
+

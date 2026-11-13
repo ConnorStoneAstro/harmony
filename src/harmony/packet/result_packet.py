@@ -1,12 +1,11 @@
 from typing import Optional
-from dataclasses import dataclass
-from pathlib import Path
 
 import numpy as np
 
+from harmony import Packet
 
-@dataclass(frozen=True)
-class ResultPacket:
+
+class ResultPacket(Packet):
     """
     P: number of point sources
     N: number of image cutouts
@@ -15,6 +14,7 @@ class ResultPacket:
     """
 
     id: str
+    packet_key: str = "result_packet"
     point_source_flux: np.ndarray  # (P, N)
     point_source_flux_uncertainty: np.ndarray  # (P, N)
     point_source_position: np.ndarray  # (P, 2) ra dec
@@ -28,12 +28,3 @@ class ResultPacket:
     fitter_flags: Optional[dict[str, bool | int]] = None
     chi_squared: Optional[float] = None  # ()
     per_cutout_chi_squared: Optional[np.ndarray] = None  # (N,)
-
-    def save(self, filepath: Path):
-        # FIXME
-        pass
-
-    @classmethod
-    def load(cls, filepath: Path) -> "ResultPacket":
-        # FIXME
-        pass

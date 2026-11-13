@@ -1,12 +1,11 @@
-from pathlib import Path
 from typing import Optional
-from dataclasses import dataclass
 
 import numpy as np
 
+from harmony import Packet
 
-@dataclass(frozen=True)
-class DataPacket:
+
+class DataPacket(Packet):
     """
     N: number of image cutouts
     H: height of image cutouts (pix)
@@ -20,6 +19,7 @@ class DataPacket:
     """
 
     id: str
+    packet_key: str = "data_packet"
 
     data: np.ndarray  # (N, H, W)
     variance: np.ndarray  # (N, H, W)
@@ -48,12 +48,3 @@ class DataPacket:
     nearby_star_crpix: Optional[np.ndarray] = None  # (S, 2) 0 indexing, pixel loc of crval
     nearby_star_CD: Optional[np.ndarray] = None  # (S, 2, 2)
     nearby_star_data_index: Optional[np.ndarray] = None  # (S,) index s into the data list N
-
-    def save(self, filepath: Path):
-        # FIXME
-        pass
-
-    @classmethod
-    def load(cls, filepath: Path) -> "DataPacket":
-        # FIXME
-        pass
