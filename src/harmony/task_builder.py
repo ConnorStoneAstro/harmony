@@ -21,6 +21,14 @@ def parse_steps(step_config):
 
 
 def task_builder(config):
+    # Check that a set of paths are defined
+    assert (config["task_builder"]["data"]["paths_list"] is None) + (
+        config["task_builder"]["data"]["paths_file"] is None
+    ) + (
+        config["task_builder"]["data"]["paths_dir"] is None
+    ) == 2, "Exactly one of paths_list, paths_file, or paths_dir must be specified"
+
+    # Get the data paths
     if config["task_builder"]["data"]["paths_list"] is not None:
         data_paths = config["task_builder"]["data"]["paths_list"]
     elif config["task_builder"]["data"]["paths_file"] is not None:
@@ -32,10 +40,10 @@ def task_builder(config):
         raise ValueError("No data paths specified")
 
     output_directory = Path.cwd()
-
     steps = config["steps"]
-
     width = ceil(log10(len(data_paths) * len(steps)))
+
+    # Make the list of tasks, cross of data and pipelines
     tasks = {}
     task_counters = {pipeline_name: 0 for pipeline_name in steps}
     for data_path, pipeline in product(data_paths, steps):

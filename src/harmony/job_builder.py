@@ -19,25 +19,30 @@ python -m harmony.launch --output_directory {output_directory} --steps {steps} -
 
 def slurm_array_job_builder(config):
     output_directory = Path.cwd()
-
     steps = config["steps"].keys()
 
-    slurm_account = config["job_builder"]["slurm_account"]
-
+    # Load task list
     with open(output_directory / "harmony_tasks.yaml", "r") as f:
         tasks = load(f, Loader=SafeLoader).keys()
 
+    # Make slurm runner for each pipeline
+    slurm_account = config["job_builder"]["slurm_account"]
     for pipeline in steps:
         ntasks = sum(1 for t in tasks if t.startswith(pipeline + "_task"))
+
+        # Get the environment builder for this pipeline
         if isinstance(config["job_builder"]["env_source"], dict):
             env_source = config["job_builder"]["env_source"][pipeline]
         else:
             env_source = config["job_builder"]["env_source"]
 
+        # Get required resources for this pipeline
         if isinstance(config["job_builder"]["resources"], dict):
             resources = config["job_builder"]["resources"][pipeline]
         else:
             resources = config["job_builder"]["resources"]
+
+        # Get fill-in-the-blanks for the slurm array job template
         sub_template = {
             "steps": pipeline,
             "job_name": config["job_builder"]["job_name"][pipeline],
