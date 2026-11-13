@@ -13,8 +13,8 @@ class ResultPacket(Packet):
     B: number of posterior samples
     """
 
-    id: str
     packet_key: str = "result_packet"
+
     point_source_flux: np.ndarray  # (P, N)
     point_source_flux_uncertainty: np.ndarray  # (P, N)
     point_source_position: np.ndarray  # (P, 2) ra dec

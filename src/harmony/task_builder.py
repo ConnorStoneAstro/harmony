@@ -31,7 +31,7 @@ def task_builder(config):
     else:
         raise ValueError("No data paths specified")
 
-    output_directory = config["task_builder"]["output_directory"]
+    output_directory = Path.cwd()
 
     steps = config["steps"]
 
@@ -43,8 +43,8 @@ def task_builder(config):
         task_counters[pipeline] += 1
         tasks[taskname] = {
             "data_path": data_path,
-            "save_path": f"{output_directory}/{taskname}",
+            "save_path": str(output_directory / taskname),
         }
 
-    with open(f"{output_directory}/harmony_tasks.yaml", "w") as file:
+    with open(output_directory / "harmony_tasks.yaml", "w") as file:
         dump(tasks, file, default_flow_style=False, sort_keys=False)

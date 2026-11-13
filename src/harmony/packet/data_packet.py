@@ -18,7 +18,6 @@ class DataPacket(Packet):
     Ws: width of nearby star cutouts (pix)
     """
 
-    id: str
     packet_key: str = "data_packet"
 
     data: np.ndarray  # (N, H, W)

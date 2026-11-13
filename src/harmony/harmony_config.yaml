@@ -1,7 +1,5 @@
 ## Job configuration
 
-output_directory: None # Path to the output directory
-
 task_builder:
   constructor: harmony.task_builder # Task builder class import dot path
   data:
@@ -18,7 +16,10 @@ job_builder:
   env_source:
     pipeline1: path/to/env_source.sh
   resources:
-    pipeline1: None # Dict of resources required for the pipeline (e.g., cpu, gpu, mem, time)
+    pipeline1: 
+      qos: regular
+      time: 01:00:00
+      gpus-per-task: "1:A100"
 
 steps:
   pipeline1:
